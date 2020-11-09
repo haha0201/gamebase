@@ -95,7 +95,13 @@ class Player{
     
   }
 }
+/*
 const ws = new WebSocket("wss://idk.haha0201.repl.co")
+*/
+var HOST = location.origin.replace(/^http/, 'ws')
+const ws = new WebSocket(HOST);
+
+
 ws.binaryType = "arraybuffer";
 const canvas = document.getElementById("canvas");
 //document.body.appendChild(canvas)
