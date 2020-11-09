@@ -12,7 +12,7 @@ const uuid = require("uuid");
 const msgpack = require("msgpack-lite");
 const path = require("path");
 const app = express();
-const wss = new WebSocket.Server({ noServer: true });
+const wss = new WebSocket.Server({ app });
 console.log("Game Started")
 
 const serverTick = 35;
