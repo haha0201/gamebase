@@ -13,6 +13,13 @@ const msgpack = require("msgpack-lite");
 const path = require("path");
 const app = express();
 const wss = new WebSocket.Server({ noServer: true });
+const server = app.listen(process.env.PORT || 4000, () => console.log("Server running at port 4000"));
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, socket => {
+    wss.emit('connection', socket, request);
+  });
+});
+
 console.log("Game Started")
 
 const serverTick = 25;
@@ -111,13 +118,6 @@ wss.on("connection", ws=>{
 	})
 })
 
-
-const server = app.listen(3000);
-server.on('upgrade', (request, socket, head) => {
-  wss.handleUpgrade(request, socket, head, socket => {
-    wss.emit('connection', socket, request);
-  });
-});
 
 
 function updateGameState(clients, players){
