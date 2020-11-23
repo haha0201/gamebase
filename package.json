@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node server/index.js"
+=======
+    "start": "node src/server/index.js"
+>>>>>>> origin/master
   },
   "keywords": [],
   "author": "haha0201",

@@ -167,4 +167,8 @@ function updateGameState(clients, players){
 
 setInterval(() => {
   updateGameState(clients, players);
+<<<<<<< HEAD
 }, 1000 / serverTick); 
+=======
+}, 1000 / serverTick);
+>>>>>>> origin/master
