@@ -18,7 +18,6 @@ canvas {
   top: 0;
   cursor: crosshair;
   z-index: 0;
-  filter:saturate(125%);
 }
 #chatHolder {
   display: none;

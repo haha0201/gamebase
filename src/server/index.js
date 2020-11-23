@@ -15,7 +15,7 @@ const app = express();
 const wss = new WebSocket.Server({ noServer: true });
 console.log("Game Started")
 
-const serverTick = 35;
+const serverTick = 25;
 const arenaX = 1000;
 const arenaY = 1000;
 
@@ -68,16 +68,28 @@ wss.on("connection", ws=>{
     if (msg.type === "keys"){
       const valueData = msg.data;
       if (valueData[0]){
-        player.velY = -player.maxVel;
+        player.movement[0] = true;
+      }
+      else{
+        player.movement[0] = false;
       }
       if (valueData[1]){
-        player.velX = player.maxVel;
+        player.movement[1] = true;
+      }
+      else{
+        player.movement[1] = false;
       }
       if (valueData[2]){
-        player.velY = player.maxVel;
+        player.movement[2] = true;
+      }
+      else{
+        player.movement[2] = false;
       }
       if (valueData[3]){
-        player.velX = -player.maxVel;
+        player.movement[3] = true;
+      }
+      else{
+        player.movement[3] = false;
       }
     }
     if (msg.type === "chat"){
@@ -155,4 +167,4 @@ function updateGameState(clients, players){
 
 setInterval(() => {
   updateGameState(clients, players);
-}, 1000 / serverTick);
+}, 1000 / serverTick); 

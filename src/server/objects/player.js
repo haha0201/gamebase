@@ -52,11 +52,24 @@ module.exports = class Player{
     this.size = 30;
     this.maxVel = 300;
     this.friction = 0.8;
+    this.movement = [false, false, false, false]
 
     this.chatTime = 3; // Seconds
     this.chatValue = "Hello!"
   }
   update(dt, arenaX, arenaY){  
+    if (this.movement[0]){
+      this.velY = -this.maxVel;
+    }
+    if (this.movement[1]){
+      this.velX = this.maxVel;
+    }
+    if (this.movement[2]){
+      this.velY = this.maxVel;
+    }
+    if (this.movement[3]){
+      this.velX = -this.maxVel;
+    }
     this.chatTime -= dt;
 
     this.x += this.velX * dt;

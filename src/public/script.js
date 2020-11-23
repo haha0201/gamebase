@@ -58,8 +58,8 @@ class Player{
   }
   interpPlayer(delta){
     if ( delta <= 1 / server.tick){
-      this.x = lerp(this.x, this.serverX, delta*server.tick)
-      this.y = lerp(this.y, this.serverY, delta*server.tick)
+      this.x = lerp(this.x, this.middleStateX, delta*server.tick)
+      this.y = lerp(this.y, this.middleStateY, delta*server.tick)
       this.middleStateX = lerp(this.middleStateX, this.serverX, delta*server.tick)
       this.middleStateY = lerp(this.middleStateY, this.serverY, delta*server.tick)
     }
@@ -222,6 +222,7 @@ function updateKeys(dt){
   if (!controller.enter){
     chatLock = false;
   }
+  let enteredChat = false;
   if (controller.enter && document.activeElement === chatBox && chatLock == false){
     if (chatBox.value.length > 0){
       const peyloade = {
@@ -229,11 +230,17 @@ function updateKeys(dt){
         data: chatBox.value
       }
       ws.send(JSON.stringify(peyloade));
+      chatHolder.style.display = "none";
     }
     chatHolder.style.display = "none";
     chatBox.value = "";
+    chatBox.blur();
+    chatHolder.style.display = "none";
+    chatHolder.style.display = "none";
+    enteredChat = true;
+
   }
-  if (controller.enter && chatLock == false && document.activeElement !== chatBox){
+  if (controller.enter && chatLock == false && document.activeElement !== chatBox && enteredChat === false){
     chatHolder.style.display = "block";
     chatBox.focus();
   }
